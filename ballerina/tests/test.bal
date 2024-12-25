@@ -22,10 +22,8 @@ final Client hubspot = check new Client(config, serviceUrl);
 #keep the meeting id as reference for other tests after creation
 string meetingId = "";
 
-
-// configurable http:BearerTokenConfig & readonly authConfig = ?;
-// ConnectionConfig config = {auth : authConfig};
-// Client baseClient = check new Client(config, serviceUrl = "https://api.hubapi.com");
+#keep the meeting batch id as reference for other tests after creation
+string meetingBatchId = "";
 
 @test:Config {
     dependsOn: [testUpdateMeeting]
@@ -74,17 +72,74 @@ function  testgetMeetingById() {
     }
 }
 
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/meetings/batch/update_update() {
-// }
+@test:Config {
+    dependsOn: [testgetBatchById]
+}
+function  testUpdateBatch() {
+    BatchInputSimplePublicObjectBatchInput payload = {
+    "inputs": [
+        {
+        "id":meetingBatchId,
+        "properties":{}    
+        }                    
+    ]
+};
 
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/meetings/batch/read_read() {
-// }
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/crm/v3/objects/meetings/batch/update.post(payload);
 
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/meetings/batch/archive_archive() {
-// }
+    if response is BatchResponseSimplePublicObject{
+        test:assertTrue(response.status is "COMPLETE");
+    }else {
+        test:assertFail("Failed to update batch of meetings");
+    }
+
+}
+
+@test:Config {
+    dependsOn: [testCreateBatch]
+}
+function  testgetBatchById() {
+    BatchReadInputSimplePublicObjectId payload = 
+        {
+  "propertiesWithHistory": [],
+  "inputs": [
+    {
+      "id": meetingBatchId
+    }
+  ],
+  "properties": []
+};
+    
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/crm/v3/objects/meetings/batch/read.post(payload);
+    if response is BatchResponseSimplePublicObject{
+        test:assertTrue(response.results.length()>=0);
+    }
+    else {
+        test:assertFail("Failed to get meeting batch");
+    }
+}
+
+@test:Config {
+    dependsOn: [testgetBatchById]
+}
+function  testArchiveBatch() {
+
+    BatchInputSimplePublicObjectId payload = {
+  "inputs": [
+    {
+      "id": meetingBatchId
+    }
+  ]
+};
+    http:Response|error response = hubspot ->/crm/v3/objects/meetings/batch/archive.post(payload);
+     if response is http:Response {
+            test:assertTrue(response.statusCode == 204);
+    } else {
+        test:assertFail("Failed to delete batch");
+    }
+
+
+}
 
 @test:Config
 function  testCreateMeeting() {
@@ -122,13 +177,29 @@ function  testgetAllMeetings() {
     }
 };
 
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/meetings/batch/upsert_upsert() {
-// }
 
-// @test:Config {}
-// isolated function  testPost-/crm/v3/objects/meetings/batch/create_create() {
-// }
+
+@test:Config
+function testCreateBatch() {
+    BatchInputSimplePublicObjectInputForCreate payload = {
+        "inputs": [
+            {
+                "properties": {},
+                "associations": []
+            }
+        ]
+    };
+
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/crm/v3/objects/meetings/batch/create.post(payload);
+
+    if response is BatchResponseSimplePublicObject{
+        meetingBatchId = response.results[0].id;
+        test:assertTrue(response.status is "COMPLETE");
+    }else {
+        test:assertFail("Failed to create batch of meetings");
+    }
+
+}
 
 @test:Config {
     dependsOn: [testgetAllMeetings]
