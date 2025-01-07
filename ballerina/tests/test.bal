@@ -29,7 +29,7 @@ string meetingBatchId = "";
     dependsOn: [testUpdateMeeting]
 }
 function  testArchiveMeeting() {
-    http:Response|error response = hubspot ->/crm/v3/objects/meetings/[meetingId].delete();
+    http:Response|error response = hubspot ->/[meetingId].delete();
      if
         response is http:Response {
             test:assertTrue(response.statusCode == 204);
@@ -48,7 +48,7 @@ function  testUpdateMeeting() {
             "hs_meeting_title": "test meeting changed"
         }
     };
-    SimplePublicObject|error updatedOutput = hubspot ->/crm/v3/objects/meetings/[meetingId].patch(payload);
+    SimplePublicObject|error updatedOutput = hubspot ->/[meetingId].patch(payload);
     if updatedOutput is SimplePublicObject {
         test:assertTrue(updatedOutput.updatedAt !is "");
         test:assertEquals(updatedOutput.properties["hs_meeting_title"], "test meeting changed");
@@ -63,7 +63,7 @@ function  testUpdateMeeting() {
     dependsOn: [testCreateMeeting]
 }
 function  testgetMeetingById() {
-    SimplePublicObjectWithAssociations|error meeting = hubspot ->/crm/v3/objects/meetings/[meetingId]();
+    SimplePublicObjectWithAssociations|error meeting = hubspot ->/[meetingId]();
     if meeting is SimplePublicObjectWithAssociations {
        
         test:assertTrue(meeting.id == meetingId);
@@ -85,7 +85,7 @@ function  testUpdateBatch() {
     ]
 };
 
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/crm/v3/objects/meetings/batch/update.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/batch/update.post(payload);
 
     if response is BatchResponseSimplePublicObject{
         test:assertTrue(response.status is "COMPLETE");
@@ -110,7 +110,7 @@ function  testgetBatchById() {
   "properties": []
 };
     
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/crm/v3/objects/meetings/batch/read.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/batch/read.post(payload);
     if response is BatchResponseSimplePublicObject{
         test:assertTrue(response.results.length()>=0);
     }
@@ -131,7 +131,7 @@ function  testArchiveBatch() {
     }
   ]
 };
-    http:Response|error response = hubspot ->/crm/v3/objects/meetings/batch/archive.post(payload);
+    http:Response|error response = hubspot ->/batch/archive.post(payload);
      if response is http:Response {
             test:assertTrue(response.statusCode == 204);
     } else {
@@ -151,7 +151,7 @@ function  testCreateMeeting() {
         "associations": []
     };
     
-    SimplePublicObject|error output = hubspot ->/crm/v3/objects/meetings.post(payload = payload);
+    SimplePublicObject|error output = hubspot ->/.post(payload = payload);
 
     if output is SimplePublicObject {
         meetingId = output.id;
@@ -168,7 +168,7 @@ function  testCreateMeeting() {
     dependsOn: [testCreateMeeting]
 }
 function  testgetAllMeetings() {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error meetings = hubspot -> /crm/v3/objects/meetings;
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error meetings = hubspot -> /;
  
     if meetings is CollectionResponseSimplePublicObjectWithAssociationsForwardPaging {
         test:assertTrue(meetings.results.length() > 0);
@@ -190,7 +190,7 @@ function testCreateBatch() {
         ]
     };
 
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/crm/v3/objects/meetings/batch/create.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot ->/batch/create.post(payload);
 
     if response is BatchResponseSimplePublicObject{
         meetingBatchId = response.results[0].id;
@@ -209,7 +209,7 @@ function  testSearchMeetings() {
         query: "test"
 
     };
-    CollectionResponseWithTotalSimplePublicObjectForwardPaging|error searchResult = hubspot ->/crm/v3/objects/meetings/search.post(payload = query);
+    CollectionResponseWithTotalSimplePublicObjectForwardPaging|error searchResult = hubspot ->/search.post(payload = query);
     if searchResult is CollectionResponseWithTotalSimplePublicObjectForwardPaging {
         test:assertTrue(searchResult.results.length() > 0);
     } else {
