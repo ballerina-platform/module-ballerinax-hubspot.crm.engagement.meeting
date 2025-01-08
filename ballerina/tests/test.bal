@@ -218,6 +218,13 @@ function  testSearchMeetings() {
 }
 
 
+// Test case which is tested in the mock service
+
+// @test:Config {}
+// isolated function  testPost-/crm/v3/objects/meetings/batch/upsert() {
+// }
+
+
 
 
 
