@@ -187,5 +187,3 @@ public function main() returns error? {
 ## Examples
 
 The `HubSpot CRM Engagement Meeting` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.engagement.meeting/tree/main/examples/), covering the following use cases:
-
-[//]: # (TODO: Add examples)
