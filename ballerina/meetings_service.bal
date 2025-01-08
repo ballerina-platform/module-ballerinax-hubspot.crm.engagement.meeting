@@ -3,7 +3,7 @@
 
 import ballerina/http;
 
-listener http:Listener ep0 = new (443, config = {host: "api.hubapi.com"});
+listener http:Listener ep0 = new (443, config = {host: "localhost"});
 
 service / on ep0 {
     // # Archive
