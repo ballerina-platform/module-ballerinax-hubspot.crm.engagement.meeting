@@ -1,7 +1,23 @@
+// Copyright (c) 2025, WSO2 LLC. (http://www.wso2.com).
+//
+// WSO2 LLC. licenses this file to you under the Apache License,
+// Version 2.0 (the "License"); you may not use this file except
+// in compliance with the License.
+// You may obtain a copy of the License at
+//
+// http://www.apache.org/licenses/LICENSE-2.0
+//
+// Unless required by applicable law or agreed to in writing,
+// software distributed under the License is distributed on an
+// "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+// KIND, either express or implied.  See the License for the
+// specific language governing permissions and limitations
+// under the License.
+
+import ballerina/http;
+import ballerina/io;
 import ballerina/oauth2;
 import ballerinax/hubspot.crm.engagement.meeting as meeting;
-import ballerina/io;
-import ballerina/http;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
@@ -21,9 +37,10 @@ public function main() returns error? {
     string meetingId = "";
     final meeting:Client meetingClient = check new ({auth});
 
-    meeting:SimplePublicObjectInputForCreate createPayload ={
+    //create a meeting associated with the contact
+    meeting:SimplePublicObjectInputForCreate createPayload = {
         "properties": {
-            "hs_timestamp": "2021-03-23T01:02:44.872Z",
+            "hs_timestamp": "2025-03-23T01:02:44.872Z",
             "hs_meeting_title": "Intro meeting",
             "hs_meeting_body": "The first meeting to discuss options",
             "hs_internal_meeting_notes": "These are the meeting notes",
@@ -57,9 +74,9 @@ public function main() returns error? {
     io:println(`Created Meeting title: ${meetingOutput.properties["hs_meeting_title"]} and scheduled date ${meetingOutput.properties["hs_timestamp"]}`);
 
     //update created meeting scheduled date and titile
-    meeting:SimplePublicObjectInput updatePayload ={
+    meeting:SimplePublicObjectInput updatePayload = {
         "properties": {
-            "hs_timestamp": "2021-05-23T01:02:44.872Z",
+            "hs_timestamp": "2025-05-23T01:02:44.872Z",
             "hs_meeting_title": "Intro meeting updated"
         }
     };
@@ -74,5 +91,4 @@ public function main() returns error? {
     http:Response response = check meetingClient->/[meetingId].delete();
     io:println(`Meeting deleted with status code ${response.statusCode}`);
 }
-
 
