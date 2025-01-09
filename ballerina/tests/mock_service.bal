@@ -17,7 +17,7 @@
 import ballerina/http;
 import ballerina/log;
 
-listener http:Listener httpListener = new(9090);
+listener http:Listener httpListener = new (9090);
 
 http:Service mockService = service object {
 
@@ -26,7 +26,7 @@ http:Service mockService = service object {
             "completedAt": "2025-01-07T08:47:48.319Z",
             "requestedAt": "2025-01-07T08:47:48.319Z",
             "startedAt": "2025-01-07T08:47:48.319Z",
-            "results":[
+            "results": [
                 {
                     "createdAt": "2025-01-07T08:47:48.319Z",
                     "archived": true,
@@ -82,12 +82,12 @@ http:Service mockService = service object {
                     "updatedAt": "2024-12-24T17:20:34.348Z",
                     "archived": false
                 }
-              ],
+            ],
             "paging": {
-              "next": {
-              "after": "67542196651",
-              "link": "https://api.hubapi.com/crm/v3/objects/meetings?hs_static_app=developer-docs-ui&hs_static_app_version=1.11867&limit=10&archived=false&after=67542196651"
-              }
+                "next": {
+                    "after": "67542196651",
+                    "link": "https://api.hubapi.com/crm/v3/objects/meetings?hs_static_app=developer-docs-ui&hs_static_app_version=1.11867&limit=10&archived=false&after=67542196651"
+                }
             }
         };
 
@@ -109,13 +109,9 @@ http:Service mockService = service object {
         };
     }
 
-
-
-
-
 };
 
-function init() returns error?{
+function init() returns error? {
     log:printInfo("Initializing mock service");
     check httpListener.attach(mockService, "/");
     check httpListener.'start();
