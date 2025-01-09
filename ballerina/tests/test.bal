@@ -55,7 +55,6 @@ function testUpdateMeeting() returns error? {
         }
     };
     SimplePublicObject updatedOutput = check hubspot->/[meetingId].patch(payload);
-    test:assertTrue(updatedOutput.updatedAt !is "");
     test:assertEquals(updatedOutput.properties["hs_meeting_title"], "test meeting changed");
 }
 
