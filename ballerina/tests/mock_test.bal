@@ -16,14 +16,10 @@
 
 import ballerina/test;
 
-//import ballerina/http;
-
 final Client mockClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects/meetings");
 
-//final string mockTestFeedbackSubmissionId = "512";
-
 @test:Config {}
-function testMockUpsertBatch() {
+function testMockUpsertBatch() returns error? {
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
         "inputs": [
             {
@@ -33,29 +29,18 @@ function testMockUpsertBatch() {
             }
         ]
     };
-
-    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors|error response = mockClient->/batch/upsert.post(payload);
-
-    if response is BatchResponseSimplePublicUpsertObject {
-        test:assertTrue(response.status is "COMPLETE");
-    } else {
-        test:assertFail("Failed to create or update batch of meetings");
-    }
+    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check mockClient->/batch/upsert.post(payload);
+    test:assertTrue(response.status is "COMPLETE");
 }
 
 @test:Config {}
-function testMockGetMeetings() {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging|error response = mockClient->/;
-    if response is CollectionResponseSimplePublicObjectWithAssociationsForwardPaging {
-        test:assertTrue(response.results.length() > 0);
-    } else {
-        test:assertFail("Failed to get meetings");
-    }
+function testMockGetMeetings() returns error? {
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check mockClient->/;
+    test:assertTrue(response.results.length() > 0);
 }
 
 @test:Config {}
-
-function testMockCreateMeeting() {
+function testMockCreateMeeting() returns error? {
     BatchInputSimplePublicObjectInputForCreate payload = {
         "inputs": [
             {
@@ -64,14 +49,8 @@ function testMockCreateMeeting() {
             }
         ]
     };
-
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors|error response = hubspot->/batch/create.post(payload);
-
-    if response is BatchResponseSimplePublicObject {
-        meetingBatchId = response.results[0].id;
-        test:assertTrue(response.status is "COMPLETE");
-    } else {
-        test:assertFail("Failed to create batch of meetings");
-    }
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubspot->/batch/create.post(payload);
+    meetingBatchId = response.results[0].id;
+    test:assertTrue(response.status is "COMPLETE");
 }
 
