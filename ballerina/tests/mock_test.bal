@@ -16,7 +16,7 @@
 
 import ballerina/test;
 
-final Client mockClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects/meetings");
+final Client meetingClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects/meetings");
 
 @test:Config {}
 function testMockUpsertBatch() returns error? {
@@ -29,13 +29,13 @@ function testMockUpsertBatch() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check mockClient->/batch/upsert.post(payload);
+    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check meetingClient->/batch/upsert.post(payload);
     test:assertTrue(response.status is "COMPLETE");
 }
 
 @test:Config {}
 function testMockGetMeetings() returns error? {
-    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check mockClient->/;
+    CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check meetingClient->/;
     test:assertTrue(response.results.length() > 0);
 }
 
@@ -49,7 +49,7 @@ function testMockCreateMeeting() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check hubspot->/batch/create.post(payload);
+    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check meetingClient->/batch/create.post(payload);
     meetingBatchId = response.results[0].id;
     test:assertTrue(response.status is "COMPLETE");
 }
