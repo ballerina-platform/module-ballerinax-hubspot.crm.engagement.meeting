@@ -41,15 +41,14 @@ function testMockGetMeetings() returns error? {
 
 @test:Config {}
 function testMockCreateMeeting() returns error? {
-    BatchInputSimplePublicObjectInputForCreate payload = {
-        "inputs": [
-            {
-                "properties": {},
-                "associations": []
-            }
-        ]
+    SimplePublicObjectInputForCreate payload = {
+        "properties": {
+            "hs_timestamp": "2021-03-23T01:02:44.872Z",
+            "hs_meeting_title": "test meeting"
+        },
+        "associations": []
     };
-    BatchResponseSimplePublicObject|BatchResponseSimplePublicObjectWithErrors response = check meetingClient->/batch/create.post(payload);
-    meetingBatchId = response.results[0].id;
-    test:assertTrue(response.status is "COMPLETE");
+    SimplePublicObject output = check meetingClient->/.post(payload = payload);
+    meetingId = output.id;
+    test:assertTrue(output.createdAt !is "");
 }
