@@ -1,13 +1,11 @@
 ## Overview
 
-[//]: # (TODO: Add overview mentioning the purpose of the module, supported REST API versions, and other high-level details.)
-[HubSpot](https://www.hubspot.com/?hubs_content=www.hubspot.com/our-story&hubs_content-cta=null) is an inbound marketing, sales, and customer service platform offering tools for CRM, content management, email marketing, lead generation, and analytics to help businesses grow and engage customers effectively.
+[HubSpot ](https://www.hubspot.com/) is an AI-powered customer relationship management (CRM) platform. 
 
-The `hubspot.crm.engagement.meeting` package offers APIs to connect and interact with [Meetings API](https://developers.hubspot.com/docs/reference/api/crm/engagements/meetings) endpoints, specifically based on HubSpot API v3.
+The `ballerinax/module-ballerinax-hubspot.crm.engagement.meeting` connector offers APIs to connect and interact with the [Hubspot Meetings API](https://developers.hubspot.com/docs/guides/api/crm/engagements/meetings) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/overview).
 
 ## Setup guide
 
-[//]: # (TODO: Add detailed steps to obtain credentials and configure the module.)
 To use the HubSpot Meetings connector, you must have access to the HubSpot API through a HubSpot developer account and a HubSpot App under it. Therefore you need to register for a developer account at HubSpot if you don't have one already.
 
 ### Step 1: Create/Login to a HubSpot Developer Account
@@ -125,8 +123,8 @@ To use the `HubSpot CRM Engagement Meeting` connector in your Ballerina applicat
 Import the ` hubspot.crm.engagement.meeting` module and `oauth2` module.
 
 ```ballerina
-import ballerina/oauth2;
 import ballerinax/ hubspot.crm.engagement.meeting as meetings;
+import ballerina/oauth2;
 ```
 
 ### Step 2: Instantiate a new connector
@@ -173,4 +171,7 @@ public function main() returns error? {
 
 ## Examples
 
-The `HubSpot CRM Engagement Meeting` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/module-ballerinax-hubspot.crm.engagement.meeting/tree/main/examples/), covering the following use cases:
+The `HubSpot CRM Engagement Meeting` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ThisaraWeerakoon/module-ballerinax-hubspot.crm.engagement.meeting/tree/2649b2ba86bc717646d1ea98a71fbfc2b6c3106f/examples), covering the following use cases:
+
+1. [Meeting_batch](https://github.com/ThisaraWeerakoon/module-ballerinax-hubspot.crm.engagement.meeting/tree/2649b2ba86bc717646d1ea98a71fbfc2b6c3106f/examples/Meeting_batch)
+2. [Meeting_for_contacts](https://github.com/ThisaraWeerakoon/module-ballerinax-hubspot.crm.engagement.meeting/tree/2649b2ba86bc717646d1ea98a71fbfc2b6c3106f/examples/Meeting_for_contacts)
