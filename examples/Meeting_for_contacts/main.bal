@@ -33,8 +33,6 @@ meeting:OAuth2RefreshTokenGrantConfig auth = {
 };
 
 public function main() returns error? {
-
-    string meetingId = "";
     final meeting:Client meetingClient = check new ({auth});
 
     //create a meeting associated with the contact
@@ -66,7 +64,7 @@ public function main() returns error? {
 
     };
     meeting:SimplePublicObject meetingResponse = check meetingClient->/.post(createPayload);
-    meetingId = meetingResponse.id;
+    string meetingId = meetingResponse.id;
     io:println(`A meeting created associated to the contact (contactId:${contactId}) with id ${meetingId}`);
 
     //get created meeting by id
