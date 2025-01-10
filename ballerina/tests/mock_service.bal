@@ -109,8 +109,3 @@ service on new http:Listener(9090) {
 
 };
 
-function init() returns error? {
-    log:printInfo("Initializing mock service");
-    check httpListener.attach(mockService, "/");
-    check httpListener.'start();
-}
