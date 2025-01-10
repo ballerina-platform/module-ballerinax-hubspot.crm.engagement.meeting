@@ -21,7 +21,7 @@ service on new http:Listener(9090) {
 
     resource function post crm/v3/objects/meetings/batch/upsert(@http:Payload BatchInputSimplePublicObjectBatchInputUpsert payload) returns BatchResponseSimplePublicUpsertObject|error {
         return {
-            "completedAt": "2025-01-07T08:47:48.319Z",
+            completedAt: "2025-01-07T08:47:48.319Z",
             "requestedAt": "2025-01-07T08:47:48.319Z",
             "startedAt": "2025-01-07T08:47:48.319Z",
             "results": [
