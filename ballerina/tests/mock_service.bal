@@ -17,9 +17,7 @@
 import ballerina/http;
 import ballerina/log;
 
-listener http:Listener httpListener = new (9090);
-
-http:Service mockService = service object {
+service on new http:Listener(9090) {
 
     resource function post crm/v3/objects/meetings/batch/upsert(@http:Payload BatchInputSimplePublicObjectBatchInputUpsert payload) returns BatchResponseSimplePublicUpsertObject|error {
         return {
