@@ -17,14 +17,12 @@ These changes are done in order to improve the overall usability, and as workaro
 
 2. Update the API Paths
 
-- **Original**: Paths included common prefix above in each endpoint. (eg: `/crm/v3/objects/meetings/search`)
+  - **Original**: Paths included common prefix above in each endpoint. (eg: `/crm/v3/objects/meetings/search`)
+  - **Updated**: Common prefix is now removed from the endpoints as it is included in the base URL.
+    - **Original**: `/crm/v3/objects/meetings/search`
+    - **Updated**: `/search`
+  - **Reason**: This change simplifies the API paths, making them shorter and more readable.
 
-- **Updated**: Common prefix is now removed from the endpoints as it is included in the base URL.
-
-  - **Original**: `/crm/v3/objects/meetings/search`
-  - **Updated**: `/search`
-
-- **Reason**: This change simplifies the API paths, making them shorter and more readable.
 ## OpenAPI cli command
 
 The following command was used to generate the Ballerina client from the OpenAPI specification. The command should be executed from the repository root directory.
