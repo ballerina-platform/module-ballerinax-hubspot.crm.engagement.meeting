@@ -33,8 +33,6 @@ meeting:OAuth2RefreshTokenGrantConfig auth = {
 };
 
 public function main() returns error? {
-
-    string meetingId = "";
     final meeting:Client meetingClient = check new ({auth});
 
     //create a meeting associated with the contact
