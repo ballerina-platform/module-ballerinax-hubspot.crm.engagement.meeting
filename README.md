@@ -54,8 +54,8 @@ Within app developer accounts, you can create developer test accounts to test ap
 ![Config auth](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/config-auth.png)
 
 2. In the `Scopes` section, add the following scopes for your app using the `Add new scopes` button.
-- `crm.objects.contacts.read`
-- `crm.objects.contacts.write`
+   - `crm.objects.contacts.read`
+   - `crm.objects.contacts.write`
 ![add scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/add-scopes.png)
 
 3. In the `Redirect URL` section, add the redirect URL for your app. This is the URL where the user will be redirected after the authentication process. You can use localhost for testing purposes. Then hit the `Create App` button.
