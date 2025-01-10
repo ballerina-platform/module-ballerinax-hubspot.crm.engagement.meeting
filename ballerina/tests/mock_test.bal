@@ -29,7 +29,8 @@ function testMockUpsertBatch() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = check meetingClient->/batch/upsert.post(payload);
+    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = 
+                                                                                        check meetingClient->/batch/upsert.post(payload);
     test:assertTrue(response.status is "COMPLETE");
 }
 
