@@ -53,4 +53,3 @@ function testMockCreateMeeting() returns error? {
     meetingBatchId = response.results[0].id;
     test:assertTrue(response.status is "COMPLETE");
 }
-
