@@ -166,7 +166,7 @@ Now, utilize the available connector operations. A sample usecase is shown below
     
 ```ballerina
 public function main() returns error? {
-        meetings:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetings = check baseClient -> /crm/v3/objects/meetings;
+    meetings:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetings = check baseClient -> /crm/v3/objects/meetings;
 }
 ```
 
