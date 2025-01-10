@@ -14,10 +14,10 @@
 // specific language governing permissions and limitations
 // under the License.
 
+import ballerinax/hubspot.crm.engagement.meeting as meeting;
 import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
-import ballerinax/hubspot.crm.engagement.meeting as meeting;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
