@@ -21,42 +21,42 @@ Within app developer accounts, you can create developer test accounts to test ap
 >**Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
 
 1. Go to Test accounts section from the left sidebar.
-![Hubspot Developer Portal](../docs/setup/resources/test-account.png)
+![Hubspot Developer Portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account.png)
 
 2. Click on the "Create developer test account" button on the top right corner.
-![Hubspot Developer Test Account](../docs/setup/resources/create-test-account.png)
+![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-test-account.png)
 
 3. In the pop-up window, provide a name for the test account and click on the `Create` button.
-![Hubspot Developer Test Account](../docs/setup/resources/create-account.png)
+![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-account.png)
 
 4. You will see the newly created test account in the list of test accounts.
-![Test account portal](../docs/setup/resources/test-account-portal.png)
+![Test account portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account-portal.png)
 
 ### Step 3: Create a HubSpot App
 
 1. Now navigate to the `Apps` section from the left sidebar and click on the `Create app` button on the top right corner.
-![Create app](../docs/setup/resources/create-app.png)
+![Create app](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-app.png)
 
 2. Provide a public app name and description for your app.
-![App name description](../docs/setup/resources/app-name-desc.png)
+![App name description](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/app-name-desc.png)
 
 ### Step 4: Setup Authentication
 
 1. Move to the `Auth` tab.
-![Config auth](../docs/setup/resources/config-auth.png)
+![Config auth](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/config-auth.png)
 
 2. In the `Scopes` section, add the following scopes for your app using the `Add new scopes` button.
 - `crm.objects.contacts.read`
 - `crm.objects.contacts.write`
-![add scopes](../docs/setup/resources/add-scopes.png)
+![add scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/add-scopes.png)
 
 3. In the `Redirect URL` section, add the redirect URL for your app. This is the URL where the user will be redirected after the authentication process. You can use localhost for testing purposes. Then hit the `Create App` button.
-![redirect url](../docs/setup/resources/redirect-url.png)
+![redirect url](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/redirect-url.png)
 
 ### Step 5: Get the Client ID and Client Secret
 
 Navigate to the `Auth` tab and you will see the `Client ID` and `Client Secret` for your app. Make sure to save these values.
-![client-id-secret](../docs/setup/resources/client-id-secret.png)
+![client-id-secret](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/client-id-secret.png)
 
 ### Step 6: Setup Authentication Flow
 
@@ -71,7 +71,7 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
    Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
 
 2. Paste it in the browser and select your developer test account to intall the app when prompted.
-![hubspot-oauth-consent-screen](../docs/setup/resources/hubspot-oauth-consent-screen.png)
+![hubspot-oauth-consent-screen](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/hubspot-oauth-consent-screen.png)
 
 3. A code will be displayed in the browser. Copy the code.
 
