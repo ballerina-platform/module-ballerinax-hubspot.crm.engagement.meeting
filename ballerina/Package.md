@@ -155,8 +155,7 @@ import ballerinax/ hubspot.crm.engagement.meeting as meetings;
     };
 
     ConnectionConfig config = {auth:auth};
-    final meetings:Client hubspot = check new Client(config, serviceUrl);
-
+    final meetings:Client hubspot = check new(config);
     ```
 
 ### Step 3: Invoke the connector operation
