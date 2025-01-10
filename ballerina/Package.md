@@ -125,8 +125,8 @@ To use the `HubSpot CRM Engagement Meeting` connector in your Ballerina applicat
 Import the ` hubspot.crm.engagement.meeting` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/ hubspot.crm.engagement.meeting as meetings;
 import ballerina/oauth2;
+import ballerinax/ hubspot.crm.engagement.meeting as meetings;
 ```
 
 ### Step 2: Instantiate a new connector
