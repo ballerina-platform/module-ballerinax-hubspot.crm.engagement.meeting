@@ -34,7 +34,7 @@ ConnectionConfig config = {auth: auth};
 final Client hubspot = check new Client(config, serviceUrl);
 // keep the meeting id as reference for other tests after creation
 string meetingId = "";
-# keep the meeting batch id as reference for other tests after creation
+// keep the meeting batch id as reference for other tests after creation
 string meetingBatchId = "";
 
 @test:Config {
