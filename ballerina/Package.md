@@ -114,8 +114,6 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
 
 ## Quickstart
 
-[//]: # (TODO: Add a quickstart guide to demonstrate a basic functionality of the module, including sample code snippets.)
-
 To use the `HubSpot CRM Engagement Meeting` connector in your Ballerina application, update the `.bal` file as follows:
 
 ### Step 1: Import the module
@@ -167,8 +165,6 @@ public function main() returns error? {
     meetings:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetings = check baseClient -> /crm/v3/objects/meetings;
 }
 ```
-
-
 ## Examples
 
 The `HubSpot CRM Engagement Meeting` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ThisaraWeerakoon/module-ballerinax-hubspot.crm.engagement.meeting/tree/2649b2ba86bc717646d1ea98a71fbfc2b6c3106f/examples), covering the following use cases:
