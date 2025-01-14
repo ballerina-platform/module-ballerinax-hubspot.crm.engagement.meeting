@@ -38,7 +38,8 @@ string meetingId = "";
 string meetingBatchId = "";
 
 @test:Config {
-    dependsOn: [testUpdateMeeting]
+    dependsOn: [testUpdateMeeting],
+    groups: ["live_tests"]
 }
 function testArchiveMeeting() returns error? {
     http:Response response = check hubspot->/[meetingId].delete();
@@ -46,7 +47,8 @@ function testArchiveMeeting() returns error? {
 };
 
 @test:Config {
-    dependsOn: [testgetMeetingById]
+    dependsOn: [testgetMeetingById],
+    groups: ["live_tests"]
 }
 function testUpdateMeeting() returns error? {
     SimplePublicObjectInput payload = {
@@ -59,7 +61,8 @@ function testUpdateMeeting() returns error? {
 }
 
 @test:Config {
-    dependsOn: [testCreateMeeting]
+    dependsOn: [testCreateMeeting],
+    groups: ["live_tests"]
 }
 function testgetMeetingById() returns error? {
     SimplePublicObjectWithAssociations meeting = check hubspot->/[meetingId]();
@@ -67,7 +70,8 @@ function testgetMeetingById() returns error? {
 }
 
 @test:Config {
-    dependsOn: [testgetBatchById]
+    dependsOn: [testgetBatchById],
+    groups: ["live_tests"]
 }
 function testUpdateBatch() returns error? {
     BatchInputSimplePublicObjectBatchInput payload = {
@@ -83,7 +87,8 @@ function testUpdateBatch() returns error? {
 }
 
 @test:Config {
-    dependsOn: [testCreateBatch]
+    dependsOn: [testCreateBatch],
+    groups: ["live_tests"]
 }
 function testgetBatchById() returns error? {
     BatchReadInputSimplePublicObjectId payload =
@@ -101,7 +106,8 @@ function testgetBatchById() returns error? {
 }
 
 @test:Config {
-    dependsOn: [testgetBatchById]
+    dependsOn: [testgetBatchById],
+    groups: ["live_tests"]
 }
 function testArchiveBatch() returns error? {
     BatchInputSimplePublicObjectId payload = {
@@ -115,7 +121,9 @@ function testArchiveBatch() returns error? {
     test:assertTrue(response.statusCode == 204);
 }
 
-@test:Config
+@test:Config{
+    groups: ["live_tests"]
+}
 function testCreateMeeting() returns error? {
     SimplePublicObjectInputForCreate payload = {
         "properties": {
@@ -130,14 +138,17 @@ function testCreateMeeting() returns error? {
 };
 
 @test:Config {
-    dependsOn: [testCreateMeeting]
+    dependsOn: [testCreateMeeting],
+    groups: ["live_tests"]
 }
 function testgetAllMeetings() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetings = check hubspot->/;
     test:assertTrue(meetings.results.length() > 0);
 };
 
-@test:Config
+@test:Config{
+    groups: ["live_tests"]
+}
 function testCreateBatch() returns error? {
     BatchInputSimplePublicObjectInputForCreate payload = {
         "inputs": [
@@ -153,7 +164,8 @@ function testCreateBatch() returns error? {
 }
 
 @test:Config {
-    dependsOn: [testgetAllMeetings]
+    dependsOn: [testgetAllMeetings],
+    groups: ["live_tests"]
 }
 function testSearchMeetings() returns error? {
     PublicObjectSearchRequest query = {

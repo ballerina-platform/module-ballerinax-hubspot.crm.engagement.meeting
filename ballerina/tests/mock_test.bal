@@ -16,9 +16,18 @@
 
 import ballerina/test;
 
-final Client meetingClient = check new Client(config, serviceUrl = "http://localhost:9090/crm/v3/objects/meetings");
+// create mock client
+final Client meetingClient = check new (
+    {
+        auth: {
+            token: "test-token" // This approach eliminates the need for the client to make additional server requests for token validation, such as a refresh token request in the OAuth2 flow.
+        }
+    }, "http://localhost:9090/crm/v3/objects/meetings"
+);
 
-@test:Config {}
+@test:Config {
+    groups: ["mock_tests"]
+}
 function testMockUpsertBatch() returns error? {
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
         "inputs": [
@@ -34,13 +43,17 @@ function testMockUpsertBatch() returns error? {
     test:assertTrue(response.status is "COMPLETE");
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["mock_tests"]
+}
 function testMockGetMeetings() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check meetingClient->/;
     test:assertTrue(response.results.length() > 0);
 }
 
-@test:Config {}
+@test:Config {
+    groups: ["mock_tests"]
+}
 function testMockCreateMeeting() returns error? {
     SimplePublicObjectInputForCreate payload = {
         "properties": {
