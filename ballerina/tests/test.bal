@@ -18,20 +18,23 @@ import ballerina/http;
 import ballerina/oauth2;
 import ballerina/test;
 
-configurable string clientId = ?;
-configurable string clientSecret = ?;
-configurable string refreshToken = ?;
-configurable string serviceUrl = ?;
+configurable string clientId = "clientId";
+configurable string clientSecret = "clientSecret";
+configurable string refreshToken = "refreshToken";
+configurable boolean enableClientOauth2 = false;
 
-OAuth2RefreshTokenGrantConfig auth = {
-    clientId,
-    clientSecret,
-    refreshToken,
-    credentialBearer: oauth2:POST_BODY_BEARER
+// create connection config for live client
+ConnectionConfig config = {
+    auth: enableClientOauth2 ? {
+            clientId,
+            clientSecret,
+            refreshToken,
+            credentialBearer: oauth2:POST_BODY_BEARER
+        } : {token: "Bearer token"}
 };
 
-ConnectionConfig config = {auth: auth};
-final Client hubspot = check new Client(config, serviceUrl);
+// create live client
+final Client hubspot = check new Client(config);
 // keep the meeting id as reference for other tests after creation
 string meetingId = "";
 // keep the meeting batch id as reference for other tests after creation
@@ -39,7 +42,7 @@ string meetingBatchId = "";
 
 @test:Config {
     dependsOn: [testUpdateMeeting],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testArchiveMeeting() returns error? {
     http:Response response = check hubspot->/[meetingId].delete();
@@ -48,7 +51,7 @@ function testArchiveMeeting() returns error? {
 
 @test:Config {
     dependsOn: [testgetMeetingById],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testUpdateMeeting() returns error? {
     SimplePublicObjectInput payload = {
@@ -62,7 +65,7 @@ function testUpdateMeeting() returns error? {
 
 @test:Config {
     dependsOn: [testCreateMeeting],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testgetMeetingById() returns error? {
     SimplePublicObjectWithAssociations meeting = check hubspot->/[meetingId]();
@@ -71,7 +74,7 @@ function testgetMeetingById() returns error? {
 
 @test:Config {
     dependsOn: [testgetBatchById],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testUpdateBatch() returns error? {
     BatchInputSimplePublicObjectBatchInput payload = {
@@ -88,7 +91,7 @@ function testUpdateBatch() returns error? {
 
 @test:Config {
     dependsOn: [testCreateBatch],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testgetBatchById() returns error? {
     BatchReadInputSimplePublicObjectId payload =
@@ -107,7 +110,7 @@ function testgetBatchById() returns error? {
 
 @test:Config {
     dependsOn: [testgetBatchById],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testArchiveBatch() returns error? {
     BatchInputSimplePublicObjectId payload = {
@@ -121,8 +124,8 @@ function testArchiveBatch() returns error? {
     test:assertTrue(response.statusCode == 204);
 }
 
-@test:Config{
-    groups: ["live_tests"]
+@test:Config {
+    groups: ["live_service_test"]
 }
 function testCreateMeeting() returns error? {
     SimplePublicObjectInputForCreate payload = {
@@ -139,15 +142,15 @@ function testCreateMeeting() returns error? {
 
 @test:Config {
     dependsOn: [testCreateMeeting],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testgetAllMeetings() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetings = check hubspot->/;
     test:assertTrue(meetings.results.length() > 0);
 };
 
-@test:Config{
-    groups: ["live_tests"]
+@test:Config {
+    groups: ["live_service_test"]
 }
 function testCreateBatch() returns error? {
     BatchInputSimplePublicObjectInputForCreate payload = {
@@ -165,7 +168,7 @@ function testCreateBatch() returns error? {
 
 @test:Config {
     dependsOn: [testgetAllMeetings],
-    groups: ["live_tests"]
+    groups: ["live_service_test"]
 }
 function testSearchMeetings() returns error? {
     PublicObjectSearchRequest query = {

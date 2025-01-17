@@ -14,10 +14,10 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerinax/hubspot.crm.engagement.meeting as meeting;
 import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
+import ballerinax/hubspot.crm.engagement.meeting as hsmeeting;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
@@ -25,7 +25,7 @@ configurable string refreshToken = ?;
 configurable string serviceUrl = ?;
 configurable string contactId = ?;
 
-meeting:OAuth2RefreshTokenGrantConfig auth = {
+hsmeeting:OAuth2RefreshTokenGrantConfig auth = {
     clientId,
     clientSecret,
     refreshToken,
@@ -33,10 +33,10 @@ meeting:OAuth2RefreshTokenGrantConfig auth = {
 };
 
 public function main() returns error? {
-    final meeting:Client meetingClient = check new ({auth});
+    final hsmeeting:Client meetingClient = check new ({auth});
 
     //create a meeting associated with the contact
-    meeting:SimplePublicObjectInputForCreate createPayload = {
+    hsmeeting:SimplePublicObjectInputForCreate createPayload = {
         "properties": {
             "hs_timestamp": "2025-03-23T01:02:44.872Z",
             "hs_meeting_title": "Intro meeting",
@@ -63,26 +63,26 @@ public function main() returns error? {
         ]
 
     };
-    meeting:SimplePublicObject meetingResponse = check meetingClient->/.post(createPayload);
+    hsmeeting:SimplePublicObject meetingResponse = check meetingClient->/.post(createPayload);
     string meetingId = meetingResponse.id;
     io:println(`A meeting created associated to the contact (contactId:${contactId}) with id ${meetingId}`);
 
     //get created meeting by id
-    meeting:SimplePublicObjectWithAssociations meetingOutput = check meetingClient->/[meetingId]();
+    hsmeeting:SimplePublicObjectWithAssociations meetingOutput = check meetingClient->/[meetingId]();
     io:println(`Created Meeting title: ${meetingOutput.properties["hs_meeting_title"]} and scheduled date ${meetingOutput.properties["hs_timestamp"]}`);
 
     //update created meeting scheduled date and titile
-    meeting:SimplePublicObjectInput updatePayload = {
+    hsmeeting:SimplePublicObjectInput updatePayload = {
         "properties": {
             "hs_timestamp": "2025-05-23T01:02:44.872Z",
             "hs_meeting_title": "Intro meeting updated"
         }
     };
-    meeting:SimplePublicObject updatedOutput = check meetingClient->/[meetingId].patch(updatePayload);
+    hsmeeting:SimplePublicObject updatedOutput = check meetingClient->/[meetingId].patch(updatePayload);
     io:println(`Meeting updated with title ${updatedOutput.properties["hs_meeting_title"]} and scheduled date ${updatedOutput.properties["hs_timestamp"]}`);
 
     //get all meetings associated with the contact
-    meeting:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetingList = check meetingClient->/;
+    hsmeeting:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetingList = check meetingClient->/;
     io:println(`Meetings associated with the contact: ${meetingList.toBalString()}`);
 
     //delete the created meeting
