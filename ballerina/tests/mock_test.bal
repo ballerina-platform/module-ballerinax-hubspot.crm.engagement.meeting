@@ -26,7 +26,7 @@ final Client meetingClient = check new (
 );
 
 @test:Config {
-    groups: ["mock_tests"]
+    groups: ["mock_service_test"]
 }
 function testMockUpsertBatch() returns error? {
     BatchInputSimplePublicObjectBatchInputUpsert payload = {
@@ -38,13 +38,13 @@ function testMockUpsertBatch() returns error? {
             }
         ]
     };
-    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response = 
+    BatchResponseSimplePublicUpsertObject|BatchResponseSimplePublicUpsertObjectWithErrors response =
                                                                                         check meetingClient->/batch/upsert.post(payload);
     test:assertTrue(response.status is "COMPLETE");
 }
 
 @test:Config {
-    groups: ["mock_tests"]
+    groups: ["mock_service_test"]
 }
 function testMockGetMeetings() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging response = check meetingClient->/;
@@ -52,7 +52,7 @@ function testMockGetMeetings() returns error? {
 }
 
 @test:Config {
-    groups: ["mock_tests"]
+    groups: ["mock_service_test"]
 }
 function testMockCreateMeeting() returns error? {
     SimplePublicObjectInputForCreate payload = {

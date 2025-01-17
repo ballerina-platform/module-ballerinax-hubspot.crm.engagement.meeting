@@ -14,17 +14,17 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerinax/hubspot.crm.engagement.meeting as meeting;
 import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
+import ballerinax/hubspot.crm.engagement.meeting as hsMeeting;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
 configurable string refreshToken = ?;
 configurable string serviceUrl = ?;
 
-meeting:OAuth2RefreshTokenGrantConfig auth = {
+hsMeeting:OAuth2RefreshTokenGrantConfig auth = {
     clientId,
     clientSecret,
     refreshToken,
@@ -33,10 +33,10 @@ meeting:OAuth2RefreshTokenGrantConfig auth = {
 
 public function main() returns error? {
     string meetingId = "";
-    final meeting:Client meetingClient = check new ({auth});
+    final hsMeeting:Client meetingClient = check new ({auth});
 
     //create a meeting batch
-    meeting:BatchInputSimplePublicObjectInputForCreate createBatchPayload = {
+    hsMeeting:BatchInputSimplePublicObjectInputForCreate createBatchPayload = {
         "inputs": [
             {
                 "properties": {},
@@ -44,12 +44,12 @@ public function main() returns error? {
             }
         ]
     };
-    meeting:BatchResponseSimplePublicObject meetingResponse = check meetingClient->/batch/create.post(createBatchPayload);
+    hsMeeting:BatchResponseSimplePublicObject meetingResponse = check meetingClient->/batch/create.post(createBatchPayload);
     meetingId = meetingResponse.results[0].id;
     io:println(`A meeting batch created with id ${meetingId}`);
 
     //get created meeting batch by id
-    meeting:BatchReadInputSimplePublicObjectId payload =
+    hsMeeting:BatchReadInputSimplePublicObjectId payload =
         {
         "propertiesWithHistory": [],
         "inputs": [
@@ -61,11 +61,11 @@ public function main() returns error? {
             "hs_timestamp"
         ]
     };
-    meeting:BatchResponseSimplePublicObject|meeting:BatchResponseSimplePublicObjectWithErrors meetingOutput = check meetingClient->/batch/read.post(payload);
+    hsMeeting:BatchResponseSimplePublicObject|hsMeeting:BatchResponseSimplePublicObjectWithErrors meetingOutput = check meetingClient->/batch/read.post(payload);
     io:println(`Created Meeting batch id: ${meetingOutput.results[0].id} and scheduled date ${meetingOutput.results[0].properties["hs_timestamp"]}`);
 
     //update created meeting batch scheduled date
-    meeting:BatchInputSimplePublicObjectBatchInput updatePayload = {
+    hsMeeting:BatchInputSimplePublicObjectBatchInput updatePayload = {
         "inputs": [
             {
                 "id": meetingId,
@@ -75,18 +75,18 @@ public function main() returns error? {
             }
         ]
     };
-    meeting:BatchResponseSimplePublicObject|meeting:BatchResponseSimplePublicObjectWithErrors response = check meetingClient->/batch/update.post(updatePayload);
+    hsMeeting:BatchResponseSimplePublicObject|hsMeeting:BatchResponseSimplePublicObjectWithErrors _ = check meetingClient->/batch/update.post(updatePayload);
     io:println(`Meeting batch updated with id ${meetingId}`);
 
     //archive created meeting batch
-    meeting:BatchInputSimplePublicObjectId archivePayload = {
+    hsMeeting:BatchInputSimplePublicObjectId archivePayload = {
         "inputs": [
             {
                 "id": meetingId
             }
         ]
     };
-    http:Response archiveResponse = check meetingClient->/batch/archive.post(archivePayload);
+    http:Response _ = check meetingClient->/batch/archive.post(archivePayload);
     io:println(`Meeting batch archived with id ${meetingId}`);
 
 }
