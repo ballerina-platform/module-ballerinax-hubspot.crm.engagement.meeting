@@ -17,7 +17,7 @@
 import ballerina/http;
 import ballerina/io;
 import ballerina/oauth2;
-import ballerinax/hubspot.crm.engagement.meeting as hsMeeting;
+import ballerinax/hubspot.crm.engagement.meeting as hsmeeting;
 
 configurable string clientId = ?;
 configurable string clientSecret = ?;
