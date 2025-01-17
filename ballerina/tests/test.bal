@@ -42,7 +42,8 @@ string meetingBatchId = "";
 
 @test:Config {
     dependsOn: [testUpdateMeeting],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testArchiveMeeting() returns error? {
     http:Response response = check hubspot->/[meetingId].delete();
@@ -51,7 +52,8 @@ function testArchiveMeeting() returns error? {
 
 @test:Config {
     dependsOn: [testgetMeetingById],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testUpdateMeeting() returns error? {
     SimplePublicObjectInput payload = {
@@ -65,7 +67,8 @@ function testUpdateMeeting() returns error? {
 
 @test:Config {
     dependsOn: [testCreateMeeting],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testgetMeetingById() returns error? {
     SimplePublicObjectWithAssociations meeting = check hubspot->/[meetingId]();
@@ -74,7 +77,8 @@ function testgetMeetingById() returns error? {
 
 @test:Config {
     dependsOn: [testgetBatchById],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testUpdateBatch() returns error? {
     BatchInputSimplePublicObjectBatchInput payload = {
@@ -91,7 +95,8 @@ function testUpdateBatch() returns error? {
 
 @test:Config {
     dependsOn: [testCreateBatch],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testgetBatchById() returns error? {
     BatchReadInputSimplePublicObjectId payload =
@@ -110,7 +115,8 @@ function testgetBatchById() returns error? {
 
 @test:Config {
     dependsOn: [testgetBatchById],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testArchiveBatch() returns error? {
     BatchInputSimplePublicObjectId payload = {
@@ -125,7 +131,8 @@ function testArchiveBatch() returns error? {
 }
 
 @test:Config {
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testCreateMeeting() returns error? {
     SimplePublicObjectInputForCreate payload = {
@@ -142,7 +149,8 @@ function testCreateMeeting() returns error? {
 
 @test:Config {
     dependsOn: [testCreateMeeting],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testgetAllMeetings() returns error? {
     CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetings = check hubspot->/;
@@ -150,7 +158,8 @@ function testgetAllMeetings() returns error? {
 };
 
 @test:Config {
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testCreateBatch() returns error? {
     BatchInputSimplePublicObjectInputForCreate payload = {
@@ -168,7 +177,8 @@ function testCreateBatch() returns error? {
 
 @test:Config {
     dependsOn: [testgetAllMeetings],
-    groups: ["live_service_test"]
+    groups: ["live_service_test"],
+    enable: enableClientOauth2
 }
 function testSearchMeetings() returns error? {
     PublicObjectSearchRequest query = {
