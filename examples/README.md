@@ -2,16 +2,16 @@
 
 The `ballerinax/hubspot.crm.engagement.meeting` connector provides practical examples illustrating usage in various scenarios.
 
-1. [Meeting_batch](./Meeting_batch/) - Manage batch of meeting 
-2. [Meeting_for_contacts](./Meeting_for_contacts/) - Create update and archive meeting associated to a Contact  
+1. [Meeting_batch](./meeting_batch/) - Manage batch of meeting
+2. [Meeting_for_contacts](./meeting_for_contacts/) - Create update and archive meeting associated to a Contact
 
 ## Prerequisites
 
 - **Ballerina:** Download and install Ballerina from [here](https://ballerina.io/downloads/).
 - **HubSpot developer account:** Create a HubSpot developer account and create an app to obtain the necessary credentials. Refer to the [Setup Guide](../ballerina/Package.md) for instructions.
-- **`hubspot.crm.engagement.meeting` module:** Import the `ballerinax/hubspot.crm.engagement.meeting` module into your Ballerina project and configure it with the obtained credentials. Refer to the [Config.toml.template](./Meeting_batch/Config.toml.template) file for creating the `Config.toml` file.
+- **`hubspot.crm.engagement.meeting` module:** Import the `ballerinax/hubspot.crm.engagement.meeting` module into your Ballerina project and configure it with the obtained credentials. Refer to the [`Config.toml.template`](./Meeting_batch/Config.toml.template) file for creating the `Config.toml` file.
 
-```
+```ballerina
 import ballerinax/hubspot.crm.engagement.meeting as meeting;
 
 configurable string clientId = ?;
@@ -28,7 +28,6 @@ meeting:OAuth2RefreshTokenGrantConfig auth = {
 
 final meeting:Client meetingClient = check new ({auth});
 ```
-
 
 ## Running an example
 
