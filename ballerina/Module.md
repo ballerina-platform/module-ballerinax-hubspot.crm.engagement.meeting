@@ -1,6 +1,6 @@
 ## Overview
 
-[HubSpot ](https://www.hubspot.com/) is an AI-powered customer relationship management (CRM) platform. 
+[HubSpot ](https://www.hubspot.com/) is an AI-powered customer relationship management (CRM) platform.
 
 The `ballerinax/module-ballerinax-hubspot.crm.engagement.meeting` connector offers APIs to connect and interact with the [Hubspot Meetings API](https://developers.hubspot.com/docs/guides/api/crm/engagements/meetings) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/overview).
 
@@ -14,49 +14,52 @@ If you have an account already, go to the [HubSpot developer portal](https://app
 
 If you don't have a HubSpot Developer Account you can sign up to a free account [here](https://developers.hubspot.com/get-started)
 
-### Step 2 (Optional): Create a [Developer Test Account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) under your account
+### Step 2 (Optional): Create a Developer Test Account
 
-Within app developer accounts, you can create developer test accounts to test apps and integrations without affecting any real HubSpot data.
+Within app developer accounts, you can create a [developer test account](https://developers.hubspot.com/beta-docs/getting-started/account-types#developer-test-accounts) under your account to test apps and integrations without affecting any real HubSpot data.
 
 >**Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
 
 1. Go to Test accounts section from the left sidebar.
-![Hubspot Developer Portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account.png)
+   ![Hubspot Developer Portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account.png)
 
 2. Click on the "Create developer test account" button on the top right corner.
-![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-test-account.png)
+   ![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-test-account.png)
 
 3. In the pop-up window, provide a name for the test account and click on the `Create` button.
-![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-account.png)
+   ![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-account.png)
 
 4. You will see the newly created test account in the list of test accounts.
-![Test account portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account-portal.png)
+   ![Test account portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account-portal.png)
 
 ### Step 3: Create a HubSpot App
 
 1. Now navigate to the `Apps` section from the left sidebar and click on the `Create app` button on the top right corner.
-![Create app](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-app.png)
+   ![Create app](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-app.png)
 
 2. Provide a public app name and description for your app.
-![App name description](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/app-name-desc.png)
+   ![App name description](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/app-name-desc.png)
 
 ### Step 4: Setup Authentication
 
 1. Move to the `Auth` tab.
-![Config auth](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/config-auth.png)
+   ![Config auth](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/config-auth.png)
 
 2. In the `Scopes` section, add the following scopes for your app using the `Add new scopes` button.
-- `crm.objects.contacts.read`
-- `crm.objects.contacts.write`
-![add scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/add-scopes.png)
+
+   - `crm.objects.contacts.read`
+   - `crm.objects.contacts.write`
+
+   ![add scopes](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/add-scopes.png)
 
 3. In the `Redirect URL` section, add the redirect URL for your app. This is the URL where the user will be redirected after the authentication process. You can use localhost for testing purposes. Then hit the `Create App` button.
-![redirect url](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/redirect-url.png)
+   ![redirect url](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/redirect-url.png)
 
 ### Step 5: Get the Client ID and Client Secret
 
 Navigate to the `Auth` tab and you will see the `Client ID` and `Client Secret` for your app. Make sure to save these values.
-![client-id-secret](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/client-id-secret.png)
+
+   ![client-id-secret](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/client-id-secret.png)
 
 ### Step 6: Setup Authentication Flow
 
@@ -68,18 +71,14 @@ Before proceeding with the Quickstart, ensure you have obtained the Access Token
    https://app.hubspot.com/oauth/authorize?client_id=<YOUR_CLIENT_ID>&scope=<YOUR_SCOPES>&redirect_uri=<YOUR_REDIRECT_URI>
    ```
 
-   Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>` and `<YOUR_SCOPES>` with your specific value.
+   Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>`, and `<YOUR_SCOPES>` with your specific value.
 
-2. Paste it in the browser and select your developer test account to intall the app when prompted.
+2. Paste it in the browser and select your developer test account to install the app when prompted.
 ![hubspot-oauth-consent-screen](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/hubspot-oauth-consent-screen.png)
 
 3. A code will be displayed in the browser. Copy the code.
 
-   ```
-   Received code: na1-129d-860c-xxxx-xxxx-xxxxxxxxxxxx
-   ```
-
-4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI`> and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
+4. Run the following curl command. Replace the `<YOUR_CLIENT_ID>`, `<YOUR_REDIRECT_URI>`, and `<YOUR_CLIENT_SECRET>` with your specific value. Use the code you received in the above step 3 as the `<CODE>`.
 
    - Linux/macOS
 
@@ -118,10 +117,10 @@ To use the `HubSpot CRM Engagement Meeting` connector in your Ballerina applicat
 
 ### Step 1: Import the module
 
-Import the ` hubspot.crm.engagement.meeting` module and `oauth2` module.
+Import the `hubspot.crm.engagement.meeting` module and `oauth2` module.
 
 ```ballerina
-import ballerinax/ hubspot.crm.engagement.meeting as meetings;
+import ballerinax/hubspot.crm.engagement.meeting as meetings;
 import ballerina/oauth2;
 ```
 
@@ -137,7 +136,7 @@ import ballerina/oauth2;
 
 2. Instantiate a `OAuth2RefreshTokenGrantConfig` with the obtained credentials and initialize the connector with it.
 
-    ```ballerina 
+    ```ballerina
     configurable string clientId = ?;
     configurable string clientSecret = ?;
     configurable string refreshToken = ?;
@@ -156,18 +155,19 @@ import ballerina/oauth2;
 
 ### Step 3: Invoke the connector operation
 
-Now, utilize the available connector operations. A sample usecase is shown below.
+Now, utilize the available connector operations. A sample use case is shown below.
 
 #### Read all Meetings
-    
+
 ```ballerina
 public function main() returns error? {
     meetings:CollectionResponseSimplePublicObjectWithAssociationsForwardPaging meetings = check baseClient -> /crm/v3/objects/meetings;
 }
 ```
+
 ## Examples
 
-The `HubSpot CRM Engagement Meeting` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ThisaraWeerakoon/module-ballerinax-hubspot.crm.engagement.meeting/tree/2649b2ba86bc717646d1ea98a71fbfc2b6c3106f/examples), covering the following use cases:
+The `HubSpot CRM Engagement Meeting` connector provides practical examples illustrating usage in various scenarios. Explore these [examples](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/tree/main/examples), covering the following use cases:
 
-1. [Meeting_batch](https://github.com/ThisaraWeerakoon/module-ballerinax-hubspot.crm.engagement.meeting/tree/2649b2ba86bc717646d1ea98a71fbfc2b6c3106f/examples/Meeting_batch)
-2. [Meeting_for_contacts](https://github.com/ThisaraWeerakoon/module-ballerinax-hubspot.crm.engagement.meeting/tree/2649b2ba86bc717646d1ea98a71fbfc2b6c3106f/examples/Meeting_for_contacts)
+1. [Meeting_batch](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/tree/main/examples/meeting_batch)
+2. [Meeting_for_contacts](https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/tree/main/examples/meeting_for_contacts)
