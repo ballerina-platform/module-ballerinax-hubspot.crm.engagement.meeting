@@ -86,7 +86,11 @@ public function main() returns error? {
     io:println(`Meetings associated with the contact: ${meetingList.toBalString()}`);
 
     //delete the created meeting
-    http:Response response = check meetingClient->/[meetingId].delete();
-    io:println(`Meeting deleted with status code ${response.statusCode}`);
+    error? response = check meetingClient->/[meetingId].delete();
+    if response is error {
+        io:println(`Error occurred while deleting the meeting: ${response.message()}`);
+        return;
+    }
+    io:println(`Meeting deleted`);
 }
 

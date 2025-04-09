@@ -86,7 +86,7 @@ public function main() returns error? {
             }
         ]
     };
-    http:Response _ = check meetingClient->/batch/archive.post(archivePayload);
+    anydata _ = check meetingClient->/batch/archive.post(archivePayload);
     io:println(`Meeting batch archived with id ${meetingId}`);
 
 }

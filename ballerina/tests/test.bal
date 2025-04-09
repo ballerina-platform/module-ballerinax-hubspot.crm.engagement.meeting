@@ -14,7 +14,6 @@
 // specific language governing permissions and limitations
 // under the License.
 
-import ballerina/http;
 import ballerina/oauth2;
 import ballerina/test;
 
@@ -46,8 +45,8 @@ string meetingBatchId = "";
     enable: enableClientOauth2
 }
 function testArchiveMeeting() returns error? {
-    http:Response response = check hubspot->/[meetingId].delete();
-    test:assertTrue(response.statusCode == 204);
+    error? response = check hubspot->/[meetingId].delete();
+    test:assertTrue(response == ());
 };
 
 @test:Config {
@@ -126,8 +125,8 @@ function testArchiveBatch() returns error? {
             }
         ]
     };
-    http:Response response = check hubspot->/batch/archive.post(payload);
-    test:assertTrue(response.statusCode == 204);
+    error? response = check hubspot->/batch/archive.post(payload);
+    test:assertTrue(response == ());
 }
 
 @test:Config {
