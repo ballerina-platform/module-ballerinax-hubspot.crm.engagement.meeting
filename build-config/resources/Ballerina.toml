@@ -8,5 +8,6 @@ authors = ["Ballerina"]
 keywords = ["Meeting", "Vendor/HubSpot", "Area/Productivity", "Type/Connector"]
 repository = "https://github.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting"
 icon = "icon.png"
+
 [build-options]
 observabilityIncluded = true
