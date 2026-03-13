@@ -1,8 +1,15 @@
 ## Overview
 
-[HubSpot ](https://www.hubspot.com/) is an AI-powered customer relationship management (CRM) platform.
+[HubSpot](https://www.hubspot.com/) is an AI-powered customer relationship management (CRM) platform.
 
-The `ballerinax/module-ballerinax-hubspot.crm.engagement.meeting` connector offers APIs to connect and interact with the [Hubspot Meetings API](https://developers.hubspot.com/docs/guides/api/crm/engagements/meetings) endpoints, specifically based on the [HubSpot REST API](https://developers.hubspot.com/docs/reference/api/overview).
+The HubSpot CRM Engagement Meeting connector offers APIs to connect and interact with the [HubSpot Meetings API](https://developers.hubspot.com/docs/guides/api/crm/engagements/meetings) endpoints.
+
+### Key Features
+
+- Connect and interact with HubSpot Meetings API endpoints
+- Support for HubSpot REST API
+- Manage meetings and engagements efficiently
+- Integrate meeting data with contacts and other CRM objects
 
 ## Setup guide
 
