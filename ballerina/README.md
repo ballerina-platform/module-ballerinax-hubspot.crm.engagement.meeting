@@ -28,13 +28,13 @@ Within app developer accounts, you can create a [developer test account](https:/
 >**Note:** These accounts are only for development and testing purposes. In production you should not use Developer Test Accounts.
 
 1. Go to Test accounts section from the left sidebar.
-   ![Hubspot Developer Portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account.png)
+   ![HubSpot Developer Portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account.png)
 
 2. Click on the "Create developer test account" button on the top right corner.
-   ![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-test-account.png)
+   ![HubSpot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-test-account.png)
 
 3. In the pop-up window, provide a name for the test account and click on the `Create` button.
-   ![Hubspot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-account.png)
+   ![HubSpot Developer Test Account](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/create-account.png)
 
 4. You will see the newly created test account in the list of test accounts.
    ![Test account portal](https://raw.githubusercontent.com/ballerina-platform/module-ballerinax-hubspot.crm.engagement.meeting/main/docs/setup/resources/test-account-portal.png)
