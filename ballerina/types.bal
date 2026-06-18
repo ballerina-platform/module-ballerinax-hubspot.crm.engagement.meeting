@@ -19,40 +19,65 @@
 
 import ballerina/http;
 
+# Standard error response returned by the Meetings API.
 public type StandardError record {
+    # Optional sub-category providing additional error classification.
     record {} subCategory?;
+    # Contextual metadata associated with the error, as key-value pairs.
     record {|string[]...;|} context;
+    # Relevant links related to the error, as key-value pairs.
     record {|string...;|} links;
+    # Unique identifier for the error instance.
     string id?;
+    # High-level category classifying the type of error.
     string category;
+    # Human-readable message describing the error.
     string message;
+    # List of detailed error entries associated with this error.
     ErrorDetail[] errors;
+    # HTTP status code or status label for the error response.
     string status;
 };
 
+# Paginated collection of associated object IDs.
 public type CollectionResponseAssociatedId record {
+    # Pagination context containing cursors for navigating to the next or previous result page.
     Paging paging?;
+    # Array of associated object IDs returned in the response.
     AssociatedId[] results;
 };
 
+# Defines an association target object and its association types.
 public type PublicAssociationsForObject record {
+    # List of association type specifications for the target object.
     AssociationSpec[] types;
+    # Represents a public object reference identified by a unique ID string.
     PublicObjectId to;
 };
 
+# Batch operation response containing a collection of meeting objects.
 public type BatchResponseSimplePublicObject record {
+    # Timestamp when the batch operation completed.
     string completedAt;
+    # Timestamp when the batch operation was requested.
     string requestedAt?;
+    # Timestamp when the batch operation started processing.
     string startedAt;
+    # Supplementary links related to the batch response.
     record {|string...;|} links?;
+    # Array of meeting objects returned in the batch response.
     SimplePublicObject[] results;
+    # Current processing status of the batch operation.
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# A logical grouping of filters applied together in a search query.
 public type FilterGroup record {
+    # Array of filter conditions within this group.
     Filter[] filters;
 };
 
+# Detailed information about a specific error encountered during a request.
 public type ErrorDetail record {
     # A specific category that contains more specific detail about the error
     string subCategory?;
@@ -66,51 +91,85 @@ public type ErrorDetail record {
     string message;
 };
 
+# Pagination metadata for forward-only cursor-based result navigation.
 public type ForwardPaging record {
+    # Pagination cursor details for retrieving the next page of results.
     NextPage next?;
 };
 
+# A minimal object representation containing only a unique identifier.
 public type SimplePublicObjectId record {
+    # The unique identifier of the object.
     string id;
 };
 
+# Batch upsert response containing results, errors, and processing status details.
 public type BatchResponseSimplePublicUpsertObjectWithErrors record {
+    # Timestamp when the batch operation completed.
     string completedAt;
+    # Total number of errors encountered during the batch operation.
     int:Signed32 numErrors?;
+    # Timestamp when the batch operation was requested.
     string requestedAt?;
+    # Timestamp when the batch operation began processing.
     string startedAt;
+    # Map of relevant links associated with the batch response.
     record {|string...;|} links?;
+    # Array of successfully upserted meeting objects.
     SimplePublicUpsertObject[] results;
+    # Array of errors encountered for individual records in the batch.
     StandardError[] errors?;
+    # Current processing status of the batch upsert operation.
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Input schema for reading a batch of meetings by their object IDs.
 public type BatchReadInputSimplePublicObjectId record {
+    # List of properties to return along with their historical values.
     string[] propertiesWithHistory;
+    # The property to use as the unique identifier for lookups.
     string idProperty?;
+    # List of object IDs to retrieve in the batch request.
     SimplePublicObjectId[] inputs;
+    # List of property names to include in the response.
     string[] properties;
 };
 
+# Batch response containing upserted meeting objects with processing status and timestamps.
 public type BatchResponseSimplePublicUpsertObject record {
+    # Timestamp indicating when the batch operation completed.
     string completedAt;
+    # Timestamp indicating when the batch operation was requested.
     string requestedAt?;
+    # Timestamp indicating when the batch operation started processing.
     string startedAt;
+    # Map of relevant links associated with the batch response.
     record {|string...;|} links?;
+    # List of upserted meeting objects returned by the batch operation.
     SimplePublicUpsertObject[] results;
+    # Current processing status of the batch operation.
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# A property value paired with its source information and last updated timestamp.
 public type ValueWithTimestamp record {
+    # Identifier of the source that set this value.
     string sourceId?;
+    # The type of source that last updated this value.
     string sourceType;
+    # Human-readable label describing the value's source.
     string sourceLabel?;
+    # ID of the user who last updated this value.
     int:Signed32 updatedByUserId?;
+    # The property value as a string.
     string value;
+    # Timestamp indicating when this value was last updated.
     string timestamp;
 };
 
+# Input schema for a batch operation containing a list of object IDs.
 public type BatchInputSimplePublicObjectId record {
+    # List of object IDs to process in the batch operation.
     SimplePublicObjectId[] inputs;
 };
 
@@ -127,23 +186,37 @@ public type OAuth2RefreshTokenGrantConfig record {|
     string refreshUrl = "https://api.hubapi.com/oauth/v1/token";
 |};
 
+# Input schema for a batch upsert operation containing a list of meeting objects.
 public type BatchInputSimplePublicObjectBatchInputUpsert record {
+    # Array of meeting objects to upsert in batch.
     SimplePublicObjectBatchInputUpsert[] inputs;
 };
 
+# Paginated collection of meeting objects with a total count and forward paging cursor.
 public type CollectionResponseWithTotalSimplePublicObjectForwardPaging record {
+    # Total number of meeting records matching the request.
     int:Signed32 total;
+    # Pagination metadata for forward-only cursor-based result navigation.
     ForwardPaging paging?;
+    # Array of meeting objects returned in the current page.
     SimplePublicObject[] results;
 };
 
+# Represents a single meeting object with its properties, timestamps, and archival state.
 public type SimplePublicObject record {
+    # Timestamp when the meeting record was created.
     string createdAt;
+    # Indicates whether the meeting record is archived.
     boolean archived?;
+    # Timestamp when the meeting record was archived.
     string archivedAt?;
+    # Map of meeting properties to their historical values with timestamps.
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
+    # Unique identifier of the meeting record.
     string id;
+    # Key-value map of the meeting's property names and their current values.
     record {|string?...;|} properties;
+    # Timestamp when the meeting record was last updated.
     string updatedAt;
 };
 
@@ -207,49 +280,81 @@ public type ConnectionConfig record {|
     boolean laxDataBinding = true;
 |};
 
+# Represents a public object reference identified by a unique ID string.
 public type PublicObjectId record {
+    # Unique identifier of the referenced object.
     string id;
 };
 
+# Pagination context containing cursors for navigating to the next or previous result page.
 public type Paging record {
+    # Pagination cursor details for retrieving the next page of results.
     NextPage next?;
+    # Pagination cursor details for navigating to the previous page of results.
     PreviousPage prev?;
 };
 
+# Request payload for searching meeting objects with filters, sorting, and pagination.
 public type PublicObjectSearchRequest record {
+    # Full-text search query string to filter meeting results.
     string query?;
+    # Maximum number of results to return per page.
     int:Signed32 'limit?;
+    # Cursor token for retrieving the next page of results.
     string after?;
+    # List of property names to sort results by.
     string[] sorts?;
+    # List of property names to include in the response.
     string[] properties?;
+    # Groups of filters to apply when searching meetings.
     FilterGroup[] filterGroups?;
 };
 
+# Input object for upserting a meeting, containing an identifier and property map.
 public type SimplePublicObjectBatchInputUpsert record {
+    # The property name used as the unique identifier for upsert.
     string idProperty?;
+    # Trace identifier for tracking the object write operation.
     string objectWriteTraceId?;
+    # The unique identifier of the meeting to upsert.
     string id;
+    # Key-value map of meeting properties to create or update.
     record {|string...;|} properties;
 };
 
+# Batch operation response containing meeting results, processing status, timestamps, and any errors encountered.
 public type BatchResponseSimplePublicObjectWithErrors record {
+    # Timestamp when the batch operation completed.
     string completedAt;
+    # Total number of errors encountered during the batch operation.
     int:Signed32 numErrors?;
+    # Timestamp when the batch operation was requested.
     string requestedAt?;
+    # Timestamp when the batch operation began processing.
     string startedAt;
+    # Map of relevant links associated with the batch response.
     record {|string...;|} links?;
+    # List of successfully processed meeting objects from the batch.
     SimplePublicObject[] results;
+    # List of errors encountered for individual items in the batch.
     StandardError[] errors?;
+    # Current processing status of the batch operation.
     "PENDING"|"PROCESSING"|"CANCELED"|"COMPLETE" status;
 };
 
+# Request body schema for creating or updating a meeting object with properties and associations.
 public type SimplePublicObjectInput record {
+    # Trace identifier for auditing the write operation.
     string objectWriteTraceId?;
+    # Key-value map of meeting property names and their values.
     record {|string...;|} properties;
 };
 
+# Paginated collection of meeting objects returned with their associated records.
 public type CollectionResponseSimplePublicObjectWithAssociationsForwardPaging record {
+    # Pagination metadata for forward-only cursor-based result navigation.
     ForwardPaging paging?;
+    # Array of meeting objects returned with their associations.
     SimplePublicObjectWithAssociations[] results;
 };
 
@@ -259,69 +364,113 @@ public type PostCrmV3ObjectsMeetingsBatchReadReadQueries record {
     boolean archived = false;
 };
 
+# Defines the category and type of an association between two objects.
 public type AssociationSpec record {
+    # Category of the association: HUBSPOT_DEFINED, USER_DEFINED, or INTEGRATOR_DEFINED.
     "HUBSPOT_DEFINED"|"USER_DEFINED"|"INTEGRATOR_DEFINED" associationCategory;
+    # Numeric identifier for the association type.
     int:Signed32 associationTypeId;
 };
 
+# A meeting object including its properties, metadata, and associated records.
 public type SimplePublicObjectWithAssociations record {
+    # Map of associated object collections keyed by association type.
     record {|CollectionResponseAssociatedId...;|} associations?;
+    # Timestamp when the meeting record was created.
     string createdAt;
+    # Indicates whether the meeting record is archived.
     boolean archived?;
+    # Timestamp when the meeting record was archived.
     string archivedAt?;
+    # Map of property names to their historical values with timestamps.
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
+    # Unique identifier of the meeting record.
     string id;
+    # Key-value map of the meeting's current property names and values.
     record {|string?...;|} properties;
+    # Timestamp when the meeting record was last updated.
     string updatedAt;
 };
 
+# Defines a filter condition using a property, operator, and comparison value.
 public type Filter record {
+    # Upper bound value for BETWEEN range filter operations.
     string highValue?;
+    # The name of the property to filter by.
     string propertyName;
+    # List of values to match against the filter property.
     string[] values?;
+    # A single value to match against the filter property.
     string value?;
-    # null
+    # The comparison operator used to evaluate the filter condition against the property value.
     "EQ"|"NEQ"|"LT"|"LTE"|"GT"|"GTE"|"BETWEEN"|"IN"|"NOT_IN"|"HAS_PROPERTY"|"NOT_HAS_PROPERTY"|"CONTAINS_TOKEN"|"NOT_CONTAINS_TOKEN" operator;
 };
 
+# Pagination cursor details for navigating to the previous page of results.
 public type PreviousPage record {
+    # Cursor token representing the start of the previous page.
     string before;
+    # URL link to the previous page of results.
     string link?;
 };
 
+# Batch input wrapper containing a list of meeting creation objects.
 public type BatchInputSimplePublicObjectInputForCreate record {
+    # Array of meeting objects to create in batch.
     SimplePublicObjectInputForCreate[] inputs;
 };
 
+# Batch input wrapper containing a list of meeting update objects.
 public type BatchInputSimplePublicObjectBatchInput record {
+    # Array of meeting objects to update in batch.
     SimplePublicObjectBatchInput[] inputs;
 };
 
+# Represents a meeting object returned after an upsert operation, indicating whether it was newly created.
 public type SimplePublicUpsertObject record {
+    # Timestamp when the meeting object was created.
     string createdAt;
+    # Indicates whether the meeting object is archived.
     boolean archived?;
+    # Timestamp when the meeting object was archived.
     string archivedAt?;
+    # Indicates whether the object was newly created by the upsert.
     boolean 'new;
+    # Map of property names to their historical values with timestamps.
     record {|ValueWithTimestamp[]...;|} propertiesWithHistory?;
+    # The unique identifier of the meeting object.
     string id;
+    # Key-value map of the meeting's property names and values.
     record {|string...;|} properties;
+    # Timestamp when the meeting object was last updated.
     string updatedAt;
 };
 
+# Represents a single meeting update input with an ID, properties, and optional identifier configuration.
 public type SimplePublicObjectBatchInput record {
+    # The name of a unique property to use as the record identifier.
     string idProperty?;
+    # A trace ID for tracking the write operation.
     string objectWriteTraceId?;
+    # The unique identifier of the meeting record.
     string id;
+    # A map of property names to their string values for the meeting.
     record {|string...;|} properties;
 };
 
+# Pagination cursor details for retrieving the next page of results.
 public type NextPage record {
+    # The full query string link to the next page of results.
     string link?;
+    # The cursor token used to fetch the next page of results.
     string after;
 };
 
+# Represents an associated object reference with its ID and association type.
 public type AssociatedId record {
+    # The unique identifier of the associated object.
     string id;
+    # The type of association between the objects.
     string 'type;
 };
 
@@ -331,9 +480,13 @@ public type ApiKeysConfig record {|
     string privateApp;
 |};
 
+# Input payload for creating a new meeting, including properties and associations.
 public type SimplePublicObjectInputForCreate record {
+    # A list of associations linking this meeting to other CRM objects.
     PublicAssociationsForObject[] associations;
+    # A trace ID for tracking the write operation.
     string objectWriteTraceId?;
+    # A map of property names to their string values for the new meeting.
     record {|string...;|} properties;
 };
 
